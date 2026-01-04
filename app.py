@@ -108,7 +108,7 @@ if uploaded_file is not None and ticker_input and period_input:
                 # 3. 初始化模型，载入我们的“分析师人设” (System Instruction)
                 # 设置 temperature=0.1 以确保分析的客观性和准确性
                 model = genai.GenerativeModel(
-                    model_name="gemini-1.5-pro-latest",
+                    model_name="gemini-2.5-flash",
                     system_instruction=SYSTEM_INSTRUCTION,
                     generation_config={"temperature": 0.1}
                 )
