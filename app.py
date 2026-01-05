@@ -72,7 +72,7 @@ USER_PROMPT_TEMPLATE = """
 st.set_page_config(page_title="AI 专业财报分析师", page_icon="📈", layout="wide")
 
 st.title("📈 AI 专业美股财报分析助手")
-st.markdown("上传 PDF 财报 (10-K/10-Q)，基于 Gemini 1.5 Pro 超长上下文能力，生成华尔街级别的深度分析报告。")
+st.markdown("上传 PDF 财报 (10-K/10-Q)，基于 Gemini 2.5 Pro 超长上下文能力，生成华尔街级别的深度分析报告。")
 
 # 侧边栏：输入基本信息
 with st.sidebar:
@@ -80,7 +80,7 @@ with st.sidebar:
     ticker_input = st.text_input("公司股票代码 (Ticker)", value="例如: NVDA, AAPL", help="这将用于 Prompt 中指代公司")
     period_input = st.text_input("财报周期 (Period)", value="例如: FY2025 Q1", help="指明是哪个季度的财报")
     st.divider()
-    st.info("提示：Gemini 1.5 Pro 分析长文档需要时间，通常需要 1-3 分钟，请耐心等待。")
+    st.info("提示：Gemini 2.5 Pro 分析长文档需要时间，通常需要 1-3 分钟，请耐心等待。")
 
 # 主区域：文件上传
 st.header("2. 上传财报 PDF")
@@ -100,7 +100,7 @@ if uploaded_file is not None and ticker_input and period_input:
                     tmp_file_path = tmp_file.name
 
                 # 2. 将文件上传到 Google Gemini 服务器
-                # Gemini 1.5 可以直接“看”懂 PDF 文件，包括里面的表格，效果比单纯提取文本更好
+                # Gemini 2.5 可以直接“看”懂 PDF 文件，包括里面的表格，效果比单纯提取文本更好
                 upload_start_time = time.time()
                 gemini_file = genai.upload_file(path=tmp_file_path, mime_type="application/pdf")
                 st.toast(f"文件上传至 Gemini 成功 (耗时 {time.time() - upload_start_time:.1f}s)，开始生成分析...", icon="✅")
@@ -143,4 +143,5 @@ elif not ticker_input or not period_input:
 
 # 页脚
 st.divider()
-st.caption("Powered by Google Gemini 1.5 Pro & Streamlit. 本报告仅供参考，不构成投资建议。")
+st.caption("Powered by Google Gemini 2.5 Pro & Streamlit. 本报告仅供参考，不构成投资建议。")
+
